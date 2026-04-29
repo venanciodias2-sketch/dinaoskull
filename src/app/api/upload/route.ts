@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
     
     const { data, error } = await supabase.storage
-      .from('uploads') // Certifique-se de que este bucket existe e é público
+      .from('cms-assets') 
       .upload(filename, buffer, {
         contentType: file.type,
         upsert: true
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     if (!error && data) {
       // Pega a URL pública
       const { data: { publicUrl } } = supabase.storage
-        .from('uploads')
+        .from('cms-assets')
         .getPublicUrl(filename);
       
       return NextResponse.json({ url: publicUrl });
