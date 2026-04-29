@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #FF0000;
+  --color-primary-dark: #E31E24;
+  --color-dark-soft: #1a1a1a;
+  --color-dark-card: #2d2d2d;
+  
+  --font-display: var(--font-outfit), sans-serif;
+  --font-body: var(--font-plus-jakarta), sans-serif;
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+}
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  overflow-x: hidden;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-white shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all hover:bg-primary-dark hover:shadow-[0_0_30px_rgba(255,0,0,0.5)] active:scale-95;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-primary bg-transparent px-8 py-4 text-lg font-bold text-white transition-all hover:bg-primary/10 active:scale-95;
+  }
+
+  .glass-card {
+    @apply rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl transition-all hover:border-primary/30 hover:shadow-primary/10;
+  }
+
+  .text-glow {
+    @apply drop-shadow-[0_0_10px_rgba(255,0,0,0.5)];
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E31E24;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF0000;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Swiper overrides */
+.swiper-pagination-bullet {
+  @apply !bg-primary/50;
+}
+
+.swiper-pagination-bullet-active {
+  @apply !bg-primary !w-8 !rounded-full transition-all;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  @apply !text-primary;
+}

@@ -1,0 +1,244 @@
+{
+  "whatsapp": "5521999999999",
+  "group_vip": "https://chat.whatsapp.com/CODIGO_DO_GRUPO",
+  "admin": {
+    "password": "dinao2026"
+  },
+  "navbar": {
+    "links": [
+      {
+        "name": "Início",
+        "href": "#inicio"
+      },
+      {
+        "name": "Benefícios",
+        "href": "#beneficios"
+      },
+      {
+        "name": "Ingredientes",
+        "href": "#ingredientes"
+      },
+      {
+        "name": "Resultados",
+        "href": "#resultados"
+      },
+      {
+        "name": "Depoimentos",
+        "href": "#depoimentos"
+      },
+      {
+        "name": "FAQ",
+        "href": "#faq"
+      }
+    ]
+  },
+  "hero": {
+    "title": "QUEIME GORDURA COMO NUNCA ANTES",
+    "subtitle": "Termogênico Ultra Concentrado - 30 Cápsulas de Poder Puro. Acelera o metabolismo, inibe o apetite e dá energia extrema.",
+    "cta_primary": "QUERO EMAGRECER AGORA",
+    "cta_secondary": "CONHECER MAIS",
+    "image": "/pote_preto.jpg",
+    "logo": "/logo.png"
+  },
+  "problem_solution": {
+    "title": "Cansado de Suplementos que Não Funcionam?",
+    "problems": [
+      "Treina duro mas não vê resultados",
+      "Metabolismo lento e travado",
+      "Falta de energia durante o dia",
+      "Gordura teimosa que não sai"
+    ],
+    "solution_title": "A Solução Dinão Skull:",
+    "solution_text": "Nossa fórmula foi desenhada para quem atingiu o platô e precisa de um choque térmico no metabolismo. Ultra concentração para resultados visíveis.",
+    "highlights": [
+      {
+        "label": "1000mg",
+        "text": "de pura eficácia em cada cápsula"
+      },
+      {
+        "label": "30 Dias",
+        "text": "de transformação intensa garantida"
+      }
+    ]
+  },
+  "benefits": {
+    "title": "POR QUE ESCOLHER DINÃO SKULL THERMO?",
+    "subtitle": "Desenvolvido para atletas de alta performance e pessoas que buscam resultados reais de emagrecimento com segurança e potência.",
+    "items": [
+      {
+        "title": "Termogênese Potente",
+        "description": "Aumenta drasticamente a queima calórica diária, acelerando seu metabolismo por até 24h."
+      },
+      {
+        "title": "Energia e Foco",
+        "description": "Cafeína natural concentrada para treinos mais intensos, produtividade e foco mental."
+      },
+      {
+        "title": "Efeito Diurético",
+        "description": "Elimina a retenção de líquidos e o inchaço, revelando a definição muscular real."
+      },
+      {
+        "title": "Controle de Apetite",
+        "description": "Reduz a compulsão alimentar e facilita manter o déficit calórico sem sofrimento."
+      },
+      {
+        "title": "Fórmula Científica",
+        "description": "Ingredientes validados em laboratório com dosagem ultra concentrada de 1000mg."
+      },
+      {
+        "title": "Natural e Seguro",
+        "description": "Produto da farmacopeia brasileira, livre de substâncias tóxicas ou proibidas."
+      }
+    ]
+  },
+  "ingredients": {
+    "title": "FÓRMULA ULTRA CONCENTRADA",
+    "subtitle": "Transparência total: saiba exatamente o que você está colocando no seu corpo. Cada mg conta.",
+    "items": [
+      {
+        "name": "Cafeína",
+        "dose": "250mg",
+        "benefits": [
+          "Estimulante natural",
+          "Aumenta energia e foco",
+          "Acelera metabolismo"
+        ]
+      },
+      {
+        "name": "Hibiscus",
+        "dose": "300mg",
+        "benefits": [
+          "Poderoso diurético",
+          "Elimina toxinas",
+          "Reduz inchaço"
+        ]
+      },
+      {
+        "name": "Cromo",
+        "dose": "500mcg",
+        "benefits": [
+          "Regula glicemia",
+          "Reduz compulsão por doces",
+          "Melhora metabolismo"
+        ]
+      },
+      {
+        "name": "Yohimbe",
+        "dose": "5mg",
+        "benefits": [
+          "Queima localizada",
+          "Aumenta performance",
+          "Vasodilatador natural"
+        ]
+      },
+      {
+        "name": "Taraxacum",
+        "dose": "300mg",
+        "benefits": [
+          "Desintoxica o fígado",
+          "Efeito diurético",
+          "Melhora digestão"
+        ]
+      },
+      {
+        "name": "L-Carnitina",
+        "dose": "300mg",
+        "benefits": [
+          "Potencializa queima",
+          "Preserva massa magra",
+          "Aumenta resistência"
+        ]
+      }
+    ]
+  },
+  "how_it_works": {
+    "title": "TRANSFORME SEU CORPO EM 3 PASSOS SIMPLES",
+    "steps": [
+      {
+        "title": "1. Tome 1 Cápsula ao Dia",
+        "text": "De preferência pela manhã ou 30-40 minutos antes do seu treino para máxima absorção."
+      },
+      {
+        "title": "2. Sinta a Energia",
+        "text": "O efeito termogênico ativa rapidamente, aumentando seu foco e disposição para o dia."
+      },
+      {
+        "title": "3. Veja os Resultados",
+        "text": "Queima de gordura potencializada e definição muscular aparente em poucas semanas."
+      }
+    ]
+  },
+  "results": {
+    "title": "RESULTADOS REAIS",
+    "subtitle": "Milhares de pessoas já transformaram suas vidas com o Dinão Skull Thermo.",
+    "items": [
+      {
+        "name": "Carlos S.",
+        "time": "60 dias",
+        "loss": "-8kg",
+        "text": "Minha disposição mudou completamente. Recomendo!",
+        "image": ""
+      },
+      {
+        "name": "Ana P.",
+        "time": "45 dias",
+        "loss": "-6kg",
+        "text": "Finalmente um termogênico que não me dá tremedeira.",
+        "image": ""
+      },
+      {
+        "name": "Ricardo M.",
+        "time": "90 dias",
+        "loss": "-12kg",
+        "text": "A definição muscular apareceu de verdade agora.",
+        "image": ""
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "O QUE NOSSOS CLIENTES DIZEM",
+    "items": [
+      {
+        "name": "Rodrigo Oliveira",
+        "city": "São Paulo, SP",
+        "text": "O Dinão Skull foi o divisor de águas no meu cutting.",
+        "rating": 5
+      },
+      {
+        "name": "Juliana Santos",
+        "city": "Rio de Janeiro, RJ",
+        "text": "Realmente tirou minha compulsão por doces.",
+        "rating": 5
+      },
+      {
+        "name": "Novo Cliente",
+        "city": "Cidade, UF",
+        "text": "",
+        "rating": 5
+      }
+    ]
+  },
+  "faq": {
+    "title": "DÚVIDAS FREQUENTES",
+    "subtitle": "Tudo o que você precisa saber antes de começar sua jornada.",
+    "items": [
+      {
+        "q": "Como devo tomar?",
+        "a": "1 cápsula ao dia pela manhã ou antes do treino."
+      },
+      {
+        "q": "É aprovado pela ANVISA?",
+        "a": "Dispensado de registro conforme RDC 240/2018."
+      },
+      {
+        "q": "Teste",
+        "a": "Teste"
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "Copyright © 2026 DINÃO SKULL. Todos os direitos reservados.",
+    "disclaimer": "DISCLAIMER: Este produto não é um medicamento. Não substitui uma alimentação equilibrada.",
+    "product_image": "/pote_preto.jpg"
+  }
+}
