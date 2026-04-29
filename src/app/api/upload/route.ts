@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 
@@ -14,21 +15,40 @@ export async function POST(req: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create uploads directory if it doesn't exist
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    try {
-      await mkdir(uploadDir, { recursive: true });
-    } catch (e) {
-      // Ignore if directory exists
+    // 1. Tenta fazer upload para o Supabase Storage primeiro
+    const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
+    
+    const { data, error } = await supabase.storage
+      .from('uploads') // Certifique-se de que este bucket existe e é público
+      .upload(filename, buffer, {
+        contentType: file.type,
+        upsert: true
+      });
+
+    if (!error && data) {
+      // Pega a URL pública
+      const { data: { publicUrl } } = supabase.storage
+        .from('uploads')
+        .getPublicUrl(filename);
+      
+      return NextResponse.json({ url: publicUrl });
     }
 
-    const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
-    const filePath = path.join(uploadDir, filename);
+    console.warn("Supabase Upload failed, falling back to local:", error);
 
-    await writeFile(filePath, buffer);
-    const fileUrl = `/uploads/${filename}`;
+    // 2. Fallback para Local (Só funciona em localhost)
+    if (process.env.NODE_ENV === 'development') {
+      const uploadDir = path.join(process.cwd(), "public", "uploads");
+      try {
+        await mkdir(uploadDir, { recursive: true });
+      } catch (e) {}
 
-    return NextResponse.json({ url: fileUrl });
+      const filePath = path.join(uploadDir, filename);
+      await writeFile(filePath, buffer);
+      return NextResponse.json({ url: `/uploads/${filename}` });
+    }
+
+    return NextResponse.json({ error: "Upload failed on production" }, { status: 500 });
   } catch (error) {
     console.error("Upload Error:", error);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });

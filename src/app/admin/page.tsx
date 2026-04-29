@@ -236,31 +236,31 @@ export default function AdminPage() {
                       <Input 
                         label="Headline Principal" 
                         value={content.hero.title} 
-                        onChange={(v: string) => setContent({ ...content, hero: { ...content.hero, title: v } })}
+                        onChange={(v) => setContent({ ...content, hero: { ...content.hero, title: v } })}
                         placeholder="Ex: QUEIME GORDURA COMO NUNCA"
                       />
                       <Textarea 
                         label="Subheadline" 
                         value={content.hero.subtitle} 
-                        onChange={(v: string) => setContent({ ...content, hero: { ...content.hero, subtitle: v } })}
+                        onChange={(v) => setContent({ ...content, hero: { ...content.hero, subtitle: v } })}
                       />
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <Input label="Texto Botão Primário" value={content.hero.cta_primary} onChange={(v: string) => setContent({ ...content, hero: { ...content.hero, cta_primary: v } })} />
-                        <Input label="Texto Botão Secundário" value={content.hero.cta_secondary} onChange={(v: string) => setContent({ ...content, hero: { ...content.hero, cta_secondary: v } })} />
+                        <Input label="Texto Botão Primário" value={content.hero.cta_primary} onChange={(v) => setContent({ ...content, hero: { ...content.hero, cta_primary: v } })} />
+                        <Input label="Texto Botão Secundário" value={content.hero.cta_secondary} onChange={(v) => setContent({ ...content, hero: { ...content.hero, cta_secondary: v } })} />
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/5">
                         <div className="space-y-4">
-                          <Input label="URL da Imagem do Produto" value={content.hero.image} onChange={(v: string) => setContent({ ...content, hero: { ...content.hero, image: v } })} icon={<ImageIcon className="w-4 h-4" />} />
+                          <Input label="URL da Imagem do Produto" value={content.hero.image} onChange={(v) => setContent({ ...content, hero: { ...content.hero, image: v } })} icon={<ImageIcon className="w-4 h-4" />} />
                           <ImageUpload 
                             label="Upload do Produto" 
-                            onUpload={(url: string) => setContent({ ...content, hero: { ...content.hero, image: url } })} 
+                            onUpload={(url) => setContent({ ...content, hero: { ...content.hero, image: url } })} 
                           />
                         </div>
                         <div className="space-y-4">
-                          <Input label="URL da Logo" value={content.hero.logo || ""} onChange={(v: string) => setContent({ ...content, hero: { ...content.hero, logo: v } })} icon={<LinkIcon className="w-4 h-4" />} />
+                          <Input label="URL da Logo" value={content.hero.logo || ""} onChange={(v) => setContent({ ...content, hero: { ...content.hero, logo: v } })} icon={<LinkIcon className="w-4 h-4" />} />
                           <ImageUpload 
                             label="Upload da Logo" 
-                            onUpload={(url: string) => setContent({ ...content, hero: { ...content.hero, logo: url } })} 
+                            onUpload={(url) => setContent({ ...content, hero: { ...content.hero, logo: url } })} 
                           />
                         </div>
                       </div>
@@ -273,8 +273,8 @@ export default function AdminPage() {
                 <div className="space-y-8">
                   <SectionHeader title="Seção de Benefícios" icon={<Zap />} />
                   <div className="glass-card p-10 space-y-8 border border-white/5 mb-8 bg-white/[0.02]">
-                    <Input label="Título da Seção" value={content.benefits.title} onChange={(v: string) => setContent({ ...content, benefits: { ...content.benefits, title: v } })} />
-                    <Textarea label="Descrição de Apoio" value={content.benefits.subtitle} onChange={(v: string) => setContent({ ...content, benefits: { ...content.benefits, subtitle: v } })} />
+                    <Input label="Título da Seção" value={content.benefits.title} onChange={(v) => setContent({ ...content, benefits: { ...content.benefits, title: v } })} />
+                    <Textarea label="Descrição de Apoio" value={content.benefits.subtitle} onChange={(v) => setContent({ ...content, benefits: { ...content.benefits, subtitle: v } })} />
                   </div>
                   
                   <div className="grid grid-cols-1 gap-6">
@@ -296,8 +296,8 @@ export default function AdminPage() {
                           <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary font-black text-xs">{idx + 1}</div>
                           <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Item de Benefício</span>
                         </div>
-                        <Input label="Título do Card" value={item.title} onChange={(v: string) => updateItem("benefits", idx, "title", v)} />
-                        <Textarea label="Descrição Detalhada" value={item.description} onChange={(v: string) => updateItem("benefits", idx, "description", v)} />
+                        <Input label="Título do Card" value={item.title} onChange={(v) => updateItem("benefits", idx, "title", v)} />
+                        <Textarea label="Descrição Detalhada" value={item.description} onChange={(v) => updateItem("benefits", idx, "description", v)} />
                       </motion.div>
                     ))}
                     <button 
@@ -321,10 +321,10 @@ export default function AdminPage() {
                       <div key={idx} className="glass-card p-10 relative ring-1 ring-white/5 bg-white/[0.02]">
                         <button onClick={() => removeItem("ingredients", idx)} className="absolute top-6 right-6 text-gray-600 hover:text-red-500 p-2 bg-white/5 rounded-lg active:scale-90"><Trash2 className="w-4 h-4" /></button>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                          <Input label="Nome Científico / Comum" value={item.name} onChange={(v: string) => updateItem("ingredients", idx, "name", v)} />
-                          <Input label="Dosagem (Ex: 500mg)" value={item.dose} onChange={(v: string) => updateItem("ingredients", idx, "dose", v)} />
+                          <Input label="Nome Científico / Comum" value={item.name} onChange={(v) => updateItem("ingredients", idx, "name", v)} />
+                          <Input label="Dosagem (Ex: 500mg)" value={item.dose} onChange={(v) => updateItem("ingredients", idx, "dose", v)} />
                         </div>
-                        <Input label="Benefícios (separar por vírgula)" value={item.benefits.join(", ")} onChange={(v: string) => updateItem("ingredients", idx, "benefits", v.split(",").map((s: string) => s.trim()))} />
+                        <Input label="Benefícios (separar por vírgula)" value={item.benefits.join(", ")} onChange={(v) => updateItem("ingredients", idx, "benefits", v.split(",").map((s: string) => s.trim()))} />
                         <p className="mt-4 text-[10px] text-gray-600 font-bold uppercase tracking-widest italic">* Os ícones são atribuídos automaticamente baseados no nome.</p>
                       </div>
                     ))}
@@ -339,15 +339,15 @@ export default function AdminPage() {
                 <div className="space-y-8">
                   <SectionHeader title="Como Funciona" icon={<ChevronRight />} />
                   <div className="glass-card p-10 space-y-8 ring-1 ring-white/5 bg-white/[0.02]">
-                    <Input label="Título do Processo" value={content.how_it_works.title} onChange={(v: string) => setContent({ ...content, how_it_works: { ...content.how_it_works, title: v } })} />
+                    <Input label="Título do Processo" value={content.how_it_works.title} onChange={(v) => setContent({ ...content, how_it_works: { ...content.how_it_works, title: v } })} />
                     {content.how_it_works.steps.map((step: any, idx: number) => (
                       <div key={idx} className="bg-white/5 p-6 rounded-2xl space-y-4">
-                        <Input label={`Passo ${idx + 1} - Título`} value={step.title} onChange={(v: string) => {
+                        <Input label={`Passo ${idx + 1} - Título`} value={step.title} onChange={(v) => {
                           const steps = [...content.how_it_works.steps];
                           steps[idx].title = v;
                           setContent({ ...content, how_it_works: { ...content.how_it_works, steps } });
                         }} />
-                        <Textarea label={`Passo ${idx + 1} - Descrição`} value={step.text} onChange={(v: string) => {
+                        <Textarea label={`Passo ${idx + 1} - Descrição`} value={step.text} onChange={(v) => {
                           const steps = [...content.how_it_works.steps];
                           steps[idx].text = v;
                           setContent({ ...content, how_it_works: { ...content.how_it_works, steps } });
@@ -358,9 +358,9 @@ export default function AdminPage() {
 
                   <SectionHeader title="Problema & Solução" icon={<XCircleIcon />} />
                   <div className="glass-card p-10 space-y-8 ring-1 ring-white/5 bg-white/[0.02]">
-                    <Input label="Título da Seção" value={content.problem_solution.title} onChange={(v: string) => setContent({ ...content, problem_solution: { ...content.problem_solution, title: v } })} />
-                    <Input label="Subtítulo / Solução" value={content.problem_solution.solution_title} onChange={(v: string) => setContent({ ...content, problem_solution: { ...content.problem_solution, solution_title: v } })} />
-                    <Textarea label="Texto da Solução" value={content.problem_solution.solution_text} onChange={(v: string) => setContent({ ...content, problem_solution: { ...content.problem_solution, solution_text: v } })} />
+                    <Input label="Título da Seção" value={content.problem_solution.title} onChange={(v) => setContent({ ...content, problem_solution: { ...content.problem_solution, title: v } })} />
+                    <Input label="Subtítulo / Solução" value={content.problem_solution.solution_title} onChange={(v) => setContent({ ...content, problem_solution: { ...content.problem_solution, solution_title: v } })} />
+                    <Textarea label="Texto da Solução" value={content.problem_solution.solution_text} onChange={(v) => setContent({ ...content, problem_solution: { ...content.problem_solution, solution_text: v } })} />
                     
                     <div className="space-y-4">
                        <label className="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] px-1">Problemas (um por linha)</label>
@@ -378,18 +378,18 @@ export default function AdminPage() {
                 <div className="space-y-8">
                   <SectionHeader title="Depoimentos de Clientes" icon={<MessageSquare />} />
                   <div className="glass-card p-10 space-y-8 ring-1 ring-white/5 bg-white/[0.02] mb-8">
-                     <Input label="Título da Seção" value={content.testimonials.title} onChange={(v: string) => setContent({ ...content, testimonials: { ...content.testimonials, title: v } })} />
+                     <Input label="Título da Seção" value={content.testimonials.title} onChange={(v) => setContent({ ...content, testimonials: { ...content.testimonials, title: v } })} />
                   </div>
                   <div className="grid grid-cols-1 gap-6">
                     {content.testimonials.items.map((item: any, idx: number) => (
                       <div key={idx} className="glass-card p-10 relative space-y-6 ring-1 ring-white/5 bg-white/[0.02]">
                         <button onClick={() => removeItem("testimonials", idx)} className="absolute top-6 right-6 text-gray-600 hover:text-red-500 p-2 bg-white/5 rounded-lg active:scale-90"><Trash2 className="w-4 h-4" /></button>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <Input label="Nome do Cliente" value={item.name} onChange={(v: string) => updateItem("testimonials", idx, "name", v)} />
-                          <Input label="Cidade/Estado" value={item.city} onChange={(v: string) => updateItem("testimonials", idx, "city", v)} />
+                          <Input label="Nome do Cliente" value={item.name} onChange={(v) => updateItem("testimonials", idx, "name", v)} />
+                          <Input label="Cidade/Estado" value={item.city} onChange={(v) => updateItem("testimonials", idx, "city", v)} />
                         </div>
-                        <Textarea label="Depoimento" value={item.text} onChange={(v: string) => updateItem("testimonials", idx, "text", v)} />
-                        <Input label="Nota (1-5)" value={item.rating.toString()} onChange={(v: string) => updateItem("testimonials", idx, "rating", parseInt(v) || 5)} />
+                        <Textarea label="Depoimento" value={item.text} onChange={(v) => updateItem("testimonials", idx, "text", v)} />
+                        <Input label="Nota (1-5)" value={item.rating.toString()} onChange={(v) => updateItem("testimonials", idx, "rating", parseInt(v) || 5)} />
                       </div>
                     ))}
                     <button onClick={() => addItem("testimonials", { name: "Novo Cliente", city: "Cidade, UF", text: "", rating: 5 })} className="p-8 border-2 border-dashed border-white/10 rounded-3xl text-gray-500 hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2 font-black uppercase tracking-widest text-xs">
@@ -407,16 +407,16 @@ export default function AdminPage() {
                       <div key={idx} className="glass-card p-10 relative space-y-8 ring-1 ring-white/5 bg-white/[0.02]">
                         <button onClick={() => removeItem("results", idx)} className="absolute top-6 right-6 text-gray-600 hover:text-red-500 p-2 bg-white/5 rounded-lg active:scale-90"><Trash2 className="w-4 h-4" /></button>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                          <Input label="Nome do Cliente" value={item.name} onChange={(v: string) => updateItem("results", idx, "name", v)} />
-                          <Input label="Tempo de Uso" value={item.time} onChange={(v: string) => updateItem("results", idx, "time", v)} />
-                          <Input label="Peso Eliminado" value={item.loss} onChange={(v: string) => updateItem("results", idx, "loss", v)} />
+                          <Input label="Nome do Cliente" value={item.name} onChange={(v) => updateItem("results", idx, "name", v)} />
+                          <Input label="Tempo de Uso" value={item.time} onChange={(v) => updateItem("results", idx, "time", v)} />
+                          <Input label="Peso Eliminado" value={item.loss} onChange={(v) => updateItem("results", idx, "loss", v)} />
                         </div>
-                        <Textarea label="Relato Curto" value={item.text} onChange={(v: string) => updateItem("results", idx, "text", v)} />
+                        <Textarea label="Relato Curto" value={item.text} onChange={(v) => updateItem("results", idx, "text", v)} />
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
-                           <Input label="URL da Imagem de Resultado" value={item.image || ""} onChange={(v: string) => updateItem("results", idx, "image", v)} />
+                           <Input label="URL da Imagem de Resultado" value={item.image || ""} onChange={(v) => updateItem("results", idx, "image", v)} />
                            <ImageUpload 
                              label="Upload de Foto" 
-                             onUpload={(url: string) => updateItem("results", idx, "image", url)} 
+                             onUpload={(url) => updateItem("results", idx, "image", url)} 
                            />
                         </div>
                       </div>
@@ -435,8 +435,8 @@ export default function AdminPage() {
                     {content.faq.items.map((item: any, idx: number) => (
                       <div key={idx} className="glass-card p-8 relative ring-1 ring-white/5 bg-white/[0.02]">
                         <button onClick={() => removeItem("faq", idx)} className="absolute top-6 right-6 text-gray-600 hover:text-red-500 p-2 bg-white/5 rounded-lg active:scale-90"><Trash2 className="w-4 h-4" /></button>
-                        <Input label="Pergunta do Cliente" value={item.q} onChange={(v: string) => updateItem("faq", idx, "q", v)} className="mb-6" />
-                        <Textarea label="Resposta do Especialista" value={item.a} onChange={(v: string) => updateItem("faq", idx, "a", v)} />
+                        <Input label="Pergunta do Cliente" value={item.q} onChange={(v) => updateItem("faq", idx, "q", v)} className="mb-6" />
+                        <Textarea label="Resposta do Especialista" value={item.a} onChange={(v) => updateItem("faq", idx, "a", v)} />
                       </div>
                     ))}
                     <button onClick={() => addItem("faq", { q: "Pergunta?", a: "Resposta..." })} className="p-8 border-2 border-dashed border-white/10 rounded-3xl text-gray-500 hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2 font-black uppercase tracking-widest text-xs">
@@ -463,7 +463,7 @@ export default function AdminPage() {
                            <Input label="URL da Imagem" value={content.footer.product_image || ""} onChange={(v: string) => setContent({ ...content, footer: { ...content.footer, product_image: v } })} />
                            <ImageUpload 
                              label="Upload de Foto" 
-                             onUpload={(url: string) => setContent({ ...content, footer: { ...content.footer, product_image: url } })} 
+                             onUpload={(url) => setContent({ ...content, footer: { ...content.footer, product_image: url } })} 
                            />
                         </div>
                       </div>
