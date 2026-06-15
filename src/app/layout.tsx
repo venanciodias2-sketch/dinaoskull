@@ -3,6 +3,7 @@ import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import { LeadProvider } from "@/context/LeadContext";
 import { ContentProvider } from "@/context/ContentContext";
 import LeadPopup from "@/components/LeadPopup";
+import FaviconUpdater from "@/components/FaviconUpdater";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -51,6 +52,7 @@ export default function RootLayout({
           <LeadProvider>
             {children}
             <LeadPopup />
+            <FaviconUpdater />
           </LeadProvider>
         </ContentProvider>
       </body>

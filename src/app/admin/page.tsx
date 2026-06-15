@@ -252,6 +252,14 @@ export default function AdminPage() {
                     <Input label="URL logo" value={content.hero.logo} onChange={(v) => updateContent((c) => ({ ...c, hero: { ...c.hero, logo: v } }))} />
                     <ImageUpload label="Upload produto/logo" onUpload={(url) => updateContent((c) => ({ ...c, hero: { ...c.hero, image: url } }))} />
                   </Grid>
+                  <Grid>
+                    <Input label="Favicon do site" value={content.hero.favicon} onChange={(v) => updateContent((c) => ({ ...c, hero: { ...c.hero, favicon: v } }))} />
+                    <ImageUpload
+                      label="Upload favicon"
+                      helpText="Tamanho recomendado: 512 x 512 px, PNG ou ICO. Use imagem quadrada."
+                      onUpload={(favicon) => updateContent((c) => ({ ...c, hero: { ...c.hero, favicon } }))}
+                    />
+                  </Grid>
                   <TextItemEditor
                     title="Benefícios rápidos"
                     items={content.hero.quick_benefits}
@@ -608,9 +616,25 @@ function ResultEditor({ items, onChange }: { items: ResultItem[]; onChange: (ite
             <Input label="Nome" value={item.name} onChange={(name) => onChange(items.map((current, i) => i === index ? { ...current, name } : current))} />
             <Input label="Tempo" value={item.time} onChange={(time) => onChange(items.map((current, i) => i === index ? { ...current, time } : current))} />
             <Input label="Resultado" value={item.loss} onChange={(loss) => onChange(items.map((current, i) => i === index ? { ...current, loss } : current))} />
-            <Input label="Imagem" value={item.image || ""} onChange={(image) => onChange(items.map((current, i) => i === index ? { ...current, image } : current))} />
           </Grid>
           <Textarea label="Texto" value={item.text} onChange={(text) => onChange(items.map((current, i) => i === index ? { ...current, text } : current))} />
+          <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 items-start">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-black/40 flex items-center justify-center text-center text-xs text-gray-600 uppercase tracking-widest">
+              {item.image ? (
+                <Image src={item.image} alt={`Foto de resultado de ${item.name}`} fill className="object-cover" />
+              ) : (
+                <span className="px-4">Prévia da foto</span>
+              )}
+            </div>
+            <div className="space-y-4">
+              <ImageUpload
+                label="Anexar foto do resultado"
+                helpText="Tamanho recomendado: 900 x 675 px, proporção 4:3, JPG ou PNG até 2 MB."
+                onUpload={(image) => onChange(items.map((current, i) => i === index ? { ...current, image } : current))}
+              />
+              <Input label="URL da imagem (opcional)" value={item.image || ""} onChange={(image) => onChange(items.map((current, i) => i === index ? { ...current, image } : current))} />
+            </div>
+          </div>
         </ItemCard>
       ))}
     </EditorList>
@@ -727,7 +751,7 @@ function Select({ label, value, options, onChange }: { label: string; value: str
   );
 }
 
-function ImageUpload({ label, onUpload }: { label: string; onUpload: (url: string) => void }) {
+function ImageUpload({ label, helpText, onUpload }: { label: string; helpText?: string; onUpload: (url: string) => void }) {
   const [isUploading, setIsUploading] = useState(false);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -765,6 +789,7 @@ function ImageUpload({ label, onUpload }: { label: string; onUpload: (url: strin
         {isUploading ? <Loader2 className="w-5 h-5 animate-spin text-primary" /> : <Upload className="w-5 h-5 text-gray-500" />}
         <span className="text-xs font-black uppercase tracking-widest">{isUploading ? "ENVIANDO..." : "ESCOLHER ARQUIVO"}</span>
       </label>
+      {helpText && <p className="text-xs text-gray-500 leading-relaxed">{helpText}</p>}
     </div>
   );
 }

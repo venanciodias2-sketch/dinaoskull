@@ -27,6 +27,7 @@ export const defaultContent: ContentConfig = {
     cta_secondary: "CONHECER MAIS",
     image: "/pote_preto.jpg",
     logo: "/logo.png",
+    favicon: "/favicon.ico",
     image_alt: "Dinão Skull Thermo",
     formula_badge: "FÓRMULA ULTRA CONCENTRADA",
     quick_benefits: [

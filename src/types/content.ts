@@ -92,6 +92,7 @@ export type ContentConfig = {
     cta_secondary: string;
     image: string;
     logo: string;
+    favicon: string;
     image_alt: string;
     formula_badge: string;
     quick_benefits: TextItem[];
