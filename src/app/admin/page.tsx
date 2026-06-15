@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Home, Zap, ShieldCheck, ChevronRight, Image as ImageIcon, MessageSquare,
@@ -753,6 +753,7 @@ function Select({ label, value, options, onChange }: { label: string; value: str
 
 function ImageUpload({ label, helpText, onUpload }: { label: string; helpText?: string; onUpload: (url: string) => void }) {
   const [isUploading, setIsUploading] = useState(false);
+  const reactId = useId();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -776,7 +777,7 @@ function ImageUpload({ label, helpText, onUpload }: { label: string; helpText?: 
     }
   };
 
-  const inputId = `file-upload-${label.replace(/\s+/g, "-")}`;
+  const inputId = `file-upload-${reactId.replace(/:/g, "")}-${label.replace(/\s+/g, "-")}`;
 
   return (
     <div className="space-y-2">
