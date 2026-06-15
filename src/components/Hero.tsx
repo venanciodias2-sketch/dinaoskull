@@ -9,6 +9,12 @@ import { useContent } from "@/context/ContentContext";
 const Hero = () => {
   const { openPopup } = useLeadPopup();
   const { content, loading } = useContent();
+  const quickIcons = [
+    <Flame className="w-5 h-5" key="flame" />,
+    <Zap className="w-5 h-5" key="zap" />,
+    <Activity className="w-5 h-5" key="activity" />,
+    <Target className="w-5 h-5" key="target" />,
+  ];
 
   if (loading || !content) return <div className="h-screen bg-black" />;
   return (
@@ -52,7 +58,7 @@ const Hero = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="inline-block px-4 py-1 rounded-full border border-primary/50 bg-primary/10 text-primary font-bold text-xs md:text-sm mb-6 tracking-widest uppercase">
-              Ultra Concentrado 1000mg
+              {content.hero.badge}
             </span>
           </motion.div>
 
@@ -81,14 +87,9 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="grid grid-cols-2 gap-x-8 gap-y-4 mb-10 text-left"
           >
-            {[
-              { icon: <Flame className="w-5 h-5" />, text: "Metabolismo Turbo" },
-              { icon: <Zap className="w-5 h-5" />, text: "Energia Explosiva" },
-              { icon: <Activity className="w-5 h-5" />, text: "Queima Real" },
-              { icon: <Target className="w-5 h-5" />, text: "Foco Total" },
-            ].map((item, index) => (
+            {content.hero.quick_benefits.map((item, index) => (
               <div key={index} className="flex items-center gap-2 text-gray-300">
-                <span className="text-primary">{item.icon}</span>
+                <span className="text-primary">{quickIcons[index % quickIcons.length]}</span>
                 <span className="text-sm font-bold uppercase tracking-tight">{item.text}</span>
               </div>
             ))}
@@ -124,7 +125,7 @@ const Hero = () => {
           <div className="relative z-10 w-full max-w-[400px] aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl animate-float">
             <Image
               src={content.hero.image}
-              alt="Dinão Skull Thermo"
+              alt={content.hero.image_alt}
               fill
               className="object-cover"
               priority
@@ -137,7 +138,7 @@ const Hero = () => {
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             className="absolute top-10 right-10 w-24 h-24 bg-primary text-white rounded-full flex items-center justify-center p-4 text-center text-[10px] font-bold leading-tight border-4 border-black/50 shadow-xl z-20"
           >
-            FÓRMULA ULTRA CONCENTRADA
+            {content.hero.formula_badge}
           </motion.div>
         </motion.div>
       </div>

@@ -1,30 +1,47 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { mergeContent } from "@/lib/contentDefaults";
+import type { ContentConfig } from "@/types/content";
 
-const ContentContext = createContext<any>(null);
+type ContentContextValue = {
+  content: ContentConfig | null;
+  loading: boolean;
+  refreshContent: () => Promise<void>;
+};
+
+const ContentContext = createContext<ContentContextValue | undefined>(undefined);
 
 export function ContentProvider({ children }: { children: React.ReactNode }) {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<ContentConfig | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadContent() {
-      try {
-        const res = await fetch("/api/content");
-        const data = await res.json();
-        setContent(data);
-      } catch (error) {
-        console.error("Failed to load content:", error);
-      } finally {
-        setLoading(false);
-      }
+  async function refreshContent() {
+    try {
+      const res = await fetch("/api/content", { cache: "no-store" });
+      const data = await res.json();
+      setContent(mergeContent(data));
+    } catch (error) {
+      console.error("Failed to load content:", error);
+    } finally {
+      setLoading(false);
     }
-    loadContent();
+  }
+
+  useEffect(() => {
+    const initialLoad = window.setTimeout(refreshContent, 0);
+    const interval = window.setInterval(refreshContent, 5000);
+    window.addEventListener("content-updated", refreshContent);
+
+    return () => {
+      window.clearTimeout(initialLoad);
+      window.clearInterval(interval);
+      window.removeEventListener("content-updated", refreshContent);
+    };
   }, []);
 
   return (
-    <ContentContext.Provider value={{ content, loading }}>
+    <ContentContext.Provider value={{ content, loading, refreshContent }}>
       {children}
     </ContentContext.Provider>
   );

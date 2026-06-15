@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { XCircle, CheckCircle2, Zap } from "lucide-react";
 import { useLeadPopup } from "@/context/LeadContext";
-import Image from "next/image";
 import { useContent } from "@/context/ContentContext";
 
 const ProblemSolution = () => {
@@ -36,7 +35,7 @@ const ProblemSolution = () => {
             className="space-y-6"
           >
             <div className="bg-black/40 p-8 rounded-2xl border border-white/5">
-              <h3 className="text-2xl font-bold text-gray-400 mb-8 uppercase tracking-tight">O Cenário Atual:</h3>
+              <h3 className="text-2xl font-bold text-gray-400 mb-8 uppercase tracking-tight">{content.problem_solution.problem_heading}</h3>
               <ul className="space-y-6">
                 {content.problem_solution.problems.map((problem: string, index: number) => (
                   <li key={index} className="flex items-center gap-4 text-lg text-gray-300">
@@ -48,7 +47,7 @@ const ProblemSolution = () => {
             </div>
             
             <p className="text-xl font-medium text-white/80 italic">
-              "Você não precisa de mais um placebo. Você precisa de potência real."
+              &ldquo;{content.problem_solution.quote}&rdquo;
             </p>
           </motion.div>
 
@@ -69,7 +68,7 @@ const ProblemSolution = () => {
                 {content.problem_solution.solution_text}
               </p>
               <div className="space-y-4">
-                {content.problem_solution.highlights.map((h: any, i: number) => (
+                {content.problem_solution.highlights.map((h, i) => (
                   <div key={i} className="flex items-center gap-3 bg-primary/10 p-4 rounded-lg border border-primary/20">
                     <span className="font-bold text-primary">{h.label}</span>
                     <span className="text-gray-300 text-sm">{h.text}</span>
@@ -89,11 +88,11 @@ const ProblemSolution = () => {
           >
             <div className="bg-black px-12 py-6 rounded-sm flex flex-col items-center gap-6">
               <h4 className="text-2xl font-display font-black uppercase tracking-tighter">
-                Chegou a hora de conhecer o <span className="text-primary">Dinão Skull Thermo</span>
+                {content.problem_solution.cta_heading}
               </h4>
               <button onClick={openPopup} className="btn-primary cursor-pointer">
                 <Zap className="w-5 h-5" />
-                QUERO TRANSFORMAR MEU CORPO
+                {content.problem_solution.cta_text}
               </button>
             </div>
           </motion.div>

@@ -49,7 +49,7 @@ const BeforeAfter = () => {
             loop={true}
             className="pb-16"
           >
-            {content.results.items.map((result: any, index: number) => (
+            {content.results.items.map((result, index) => (
               <SwiperSlide key={index}>
                 <motion.div
                   whileHover={{ y: -10 }}
@@ -70,7 +70,7 @@ const BeforeAfter = () => {
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center text-gray-700 font-black text-4xl opacity-20 uppercase rotate-12">
-                        Resultado Real
+                        {content.results.placeholder_text}
                       </div>
                     )}
                   </div>
@@ -78,7 +78,7 @@ const BeforeAfter = () => {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-white mb-1">{result.name}</h3>
                     <p className="text-primary text-sm font-bold uppercase tracking-widest mb-4">{result.time} de uso</p>
-                    <p className="text-gray-400 italic">"{result.text}"</p>
+                    <p className="text-gray-400 italic">&ldquo;{result.text}&rdquo;</p>
                   </div>
                   
                   <div className="mt-6 flex items-center gap-1 text-yellow-500">
@@ -97,7 +97,7 @@ const BeforeAfter = () => {
         <div className="mt-12 text-center">
           <button onClick={openPopup} className="btn-primary cursor-pointer mx-auto">
             <ShoppingCart className="w-5 h-5" />
-            QUERO ESSES RESULTADOS TAMBÉM
+            {content.results.cta_text}
           </button>
         </div>
       </div>

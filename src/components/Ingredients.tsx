@@ -1,22 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Coffee, Sprout, TestTube, Wind, Layers, Brain, ArrowRight } from "lucide-react";
+import { Coffee, Sprout, TestTube, Wind, Layers, Brain, ArrowRight, type LucideIcon } from "lucide-react";
 import { useLeadPopup } from "@/context/LeadContext";
 import { useContent } from "@/context/ContentContext";
+
+const iconMap: Record<string, LucideIcon> = {
+  "Cafeína": Coffee,
+  Hibiscus: Sprout,
+  Cromo: Layers,
+  Yohimbe: Wind,
+  Taraxacum: TestTube,
+  "L-Carnitina": Brain,
+};
 
 const Ingredients = () => {
   const { openPopup } = useLeadPopup();
   const { content, loading } = useContent();
-
-  const iconMap: any = {
-    "Cafeína": <Coffee />,
-    "Hibiscus": <Sprout />,
-    "Cromo": <Layers />,
-    "Yohimbe": <Wind />,
-    "Taraxacum": <TestTube />,
-    "L-Carnitina": <Brain />,
-  };
 
   if (loading || !content) return null;
 
@@ -38,48 +38,52 @@ const Ingredients = () => {
             </p>
           </div>
           <div className="bg-primary/20 p-6 rounded-lg border border-primary/30 flex items-center gap-4">
-            <span className="text-5xl font-black text-primary">100%</span>
-            <span className="text-white font-bold leading-tight uppercase">Ingredientes <br /> Ativos</span>
+            <span className="text-5xl font-black text-primary">{content.ingredients.active_badge_value}</span>
+            <span className="text-white font-bold leading-tight uppercase">{content.ingredients.active_badge_label}</span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {content.ingredients.items.map((ing: any, index: number) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="p-8 bg-black rounded-2xl border border-white/10 hover:border-primary/50 transition-all group"
-            >
-              <div className="flex justify-between items-start mb-6">
-                <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                  {iconMap[ing.name] || <TestTube />}
+          {content.ingredients.items.map((ing, index) => {
+            const Icon = iconMap[ing.name] || TestTube;
+
+            return (
+              <motion.div
+                key={`${ing.name}-${index}`}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="p-8 bg-black rounded-2xl border border-white/10 hover:border-primary/50 transition-all group"
+              >
+                <div className="flex justify-between items-start mb-6">
+                  <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                    <Icon />
+                  </div>
+                  <div className="text-right">
+                    <span className="text-primary font-black text-2xl font-display">{ing.dose}</span>
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest">Por dose</p>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <span className="text-primary font-black text-2xl font-display">{ing.dose}</span>
-                  <p className="text-[10px] text-gray-500 uppercase tracking-widest">Por dose</p>
-                </div>
-              </div>
-              
-              <h3 className="text-xl font-bold text-white mb-6 uppercase tracking-tight">{ing.name}</h3>
-              
-              <ul className="space-y-3">
-                {ing.benefits.map((benefit: string, i: number) => (
-                  <li key={i} className="flex items-center gap-3 text-sm text-gray-400">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+
+                <h3 className="text-xl font-bold text-white mb-6 uppercase tracking-tight">{ing.name}</h3>
+
+                <ul className="space-y-3">
+                  {ing.benefits.map((benefit, i) => (
+                    <li key={`${benefit}-${i}`} className="flex items-center gap-3 text-sm text-gray-400">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            );
+          })}
         </div>
 
         <div className="mt-20 text-center">
           <button onClick={openPopup} className="btn-primary cursor-pointer mx-auto">
-            QUERO ESSA POTÊNCIA NO MEU TREINO
+            {content.ingredients.cta_text}
             <ArrowRight className="w-5 h-5" />
           </button>
         </div>

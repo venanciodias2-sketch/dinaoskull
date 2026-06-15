@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import { LeadProvider } from "@/context/LeadContext";
+import { ContentProvider } from "@/context/ContentContext";
+import LeadPopup from "@/components/LeadPopup";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -15,19 +18,19 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("http://localhost:3000"),
-  title: "Dinão Skull Thermo - Termogênico Ultra Concentrado | Queime Gordura Agora",
-  description: "Transforme seu corpo com Dinão Skull Thermo. Termogênico ultra concentrado, 30 cápsulas 1000mg. Acelera metabolismo, queima gordura e dá energia explosiva.",
-  keywords: ["termogênico", "emagrecedor", "queima gordura", "suplemento", "energia", "definição muscular"],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://dinaoskull.com"),
+  title: "Dinão Skull Thermo - Termogênico Ultra Concentrado",
+  description: "Conheça o Dinão Skull Thermo: suplemento termogênico ultra concentrado em cápsulas para apoiar energia, foco e rotina de treino.",
+  keywords: ["termogênico", "suplemento", "energia", "foco", "treino", "Dinão Skull"],
   openGraph: {
     title: "Dinão Skull Thermo - Termogênico Ultra Concentrado",
-    description: "Queime gordura como nunca antes com a fórmula ultra concentrada de Dinão Skull Thermo.",
+    description: "Suplemento ultra concentrado para energia, foco e rotina de treino.",
     type: "website",
     locale: "pt_BR",
     url: "https://dinaoskull.com",
     images: [
       {
-        url: "/og-image.png",
+        url: "/pote_preto.jpg",
         width: 1200,
         height: 630,
         alt: "Dinão Skull Thermo",
@@ -35,10 +38,6 @@ export const metadata: Metadata = {
     ],
   },
 };
-
-import { LeadProvider } from "@/context/LeadContext";
-import { ContentProvider } from "@/context/ContentContext";
-import LeadPopup from "@/components/LeadPopup";
 
 export default function RootLayout({
   children,

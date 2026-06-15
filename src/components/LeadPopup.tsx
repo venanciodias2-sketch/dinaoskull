@@ -28,18 +28,24 @@ const LeadPopup = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const whatsappMessage = `Olá! Meu nome é ${formData.name}. Gostaria de mais informações sobre o Dinão Skull Thermo. Meu objetivo é: ${formData.motivation}.`;
+
+    const whatsappMessage = (content?.lead_popup.whatsapp_message || "")
+      .replace("{name}", formData.name)
+      .replace("{email}", formData.email)
+      .replace("{phone}", formData.phone)
+      .replace("{motivation}", formData.motivation);
     const whatsappUrl = `https://wa.me/${content?.whatsapp || "5521999999999"}?text=${encodeURIComponent(whatsappMessage)}`;
+
     window.open(whatsappUrl, "_blank");
     closePopup();
+    setStep(1);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || !content) return null;
 
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-        {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -48,7 +54,6 @@ const LeadPopup = () => {
           className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         />
 
-        {/* Modal */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -68,10 +73,10 @@ const LeadPopup = () => {
                 <div className="text-center">
                   <Flame className="w-12 h-12 text-primary mx-auto mb-4" />
                   <h2 className="text-3xl font-display font-black uppercase tracking-tight text-white mb-2">
-                    QUASE LÁ!
+                    {content.lead_popup.step1_title}
                   </h2>
                   <p className="text-gray-400">
-                    Preencha os dados abaixo para falar com um especialista no WhatsApp.
+                    {content.lead_popup.step1_text}
                   </p>
                 </div>
 
@@ -82,7 +87,7 @@ const LeadPopup = () => {
                       type="text"
                       name="name"
                       required
-                      placeholder="Seu nome completo"
+                      placeholder={content.lead_popup.fields.name}
                       className="w-full bg-black/50 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white focus:border-primary outline-none transition-all"
                       onChange={handleInputChange}
                     />
@@ -93,7 +98,7 @@ const LeadPopup = () => {
                       type="email"
                       name="email"
                       required
-                      placeholder="Seu melhor e-mail"
+                      placeholder={content.lead_popup.fields.email}
                       className="w-full bg-black/50 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white focus:border-primary outline-none transition-all"
                       onChange={handleInputChange}
                     />
@@ -104,13 +109,13 @@ const LeadPopup = () => {
                       type="tel"
                       name="phone"
                       required
-                      placeholder="WhatsApp (com DDD)"
+                      placeholder={content.lead_popup.fields.phone}
                       className="w-full bg-black/50 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white focus:border-primary outline-none transition-all"
                       onChange={handleInputChange}
                     />
                   </div>
                   <button type="submit" className="btn-primary w-full py-5 text-lg">
-                    PROSSEGUIR
+                    {content.lead_popup.next_button}
                     <Send className="w-5 h-5" />
                   </button>
                 </form>
@@ -120,15 +125,10 @@ const LeadPopup = () => {
             {step === 2 && (
               <div className="space-y-6 text-center">
                 <h2 className="text-2xl font-display font-black uppercase tracking-tight text-white mb-4">
-                  VOCÊ QUER MESMO <span className="text-primary">PERDER PESO?</span>
+                  {content.lead_popup.step2_title} <span className="text-primary">{content.lead_popup.step2_highlight}</span>
                 </h2>
                 <div className="grid grid-cols-1 gap-4">
-                  {[
-                    "SIM, quero emagrecer rápido!",
-                    "QUERO transformar meu corpo agora",
-                    "PRECISO de mais energia e foco",
-                    "CHEGA de promessas, quero resultados",
-                  ].map((option) => (
+                  {content.lead_popup.motivations.map((option) => (
                     <button
                       key={option}
                       onClick={() => handleMotivationSelect(option)}
@@ -152,16 +152,16 @@ const LeadPopup = () => {
                   </motion.div>
                 </div>
                 <h2 className="text-3xl font-display font-black uppercase tracking-tight text-white">
-                  TUDO PRONTO!
+                  {content.lead_popup.step3_title}
                 </h2>
                 <p className="text-gray-400">
-                  Clique no botão abaixo para ser redirecionado ao WhatsApp e garantir sua oferta exclusiva.
+                  {content.lead_popup.step3_text}
                 </p>
-                <button 
+                <button
                   onClick={handleSubmit}
-                  className="btn-primary w-full py-6 text-xl animate-bounce-slow"
+                  className="btn-primary w-full py-6 text-xl"
                 >
-                  FALAR COM ESPECIALISTA AGORA
+                  {content.lead_popup.submit_button}
                 </button>
               </div>
             )}

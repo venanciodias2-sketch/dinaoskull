@@ -18,14 +18,16 @@ export async function POST(req: Request) {
     // 1. Tenta fazer upload para o Supabase Storage primeiro
     const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
     
-    const { data, error } = await supabase.storage
-      .from('cms-assets') 
-      .upload(filename, buffer, {
-        contentType: file.type,
-        upsert: true
-      });
+    const { data, error } = supabase
+      ? await supabase.storage
+          .from('cms-assets')
+          .upload(filename, buffer, {
+            contentType: file.type,
+            upsert: true
+          })
+      : { data: null, error: null };
 
-    if (!error && data) {
+    if (supabase && !error && data) {
       // Pega a URL pública
       const { data: { publicUrl } } = supabase.storage
         .from('cms-assets')
@@ -41,7 +43,7 @@ export async function POST(req: Request) {
       const uploadDir = path.join(process.cwd(), "public", "uploads");
       try {
         await mkdir(uploadDir, { recursive: true });
-      } catch (e) {}
+      } catch {}
 
       const filePath = path.join(uploadDir, filename);
       await writeFile(filePath, buffer);

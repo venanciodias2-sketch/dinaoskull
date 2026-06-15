@@ -43,7 +43,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-8">
-          {content.navbar.links.map((link: any) => (
+          {content.navbar.links.map((link) => (
             <a
               key={link.name}
               href={link.href}
@@ -56,7 +56,7 @@ const Navbar = () => {
             onClick={openPopup}
             className="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-bold text-sm transition-all active:scale-95 cursor-pointer"
           >
-            QUERO COMPRAR
+            {content.navbar.cta_text}
           </button>
         </div>
 
@@ -79,7 +79,7 @@ const Navbar = () => {
             className="lg:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
           >
             <div className="flex flex-col p-4 gap-4">
-              {content.navbar.links.map((link: any) => (
+              {content.navbar.links.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
@@ -93,7 +93,7 @@ const Navbar = () => {
                 onClick={() => { setIsMobileMenuOpen(false); openPopup(); }}
                 className="bg-primary text-white py-4 rounded-lg font-bold text-center mt-4 cursor-pointer"
               >
-                COMPRAR AGORA
+                {content.navbar.mobile_cta_text}
               </button>
             </div>
           </motion.div>
